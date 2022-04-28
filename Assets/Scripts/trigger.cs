@@ -13,14 +13,21 @@ public class trigger : MonoBehaviour
 
     public void InteractionTrigger()
     {
+        GetComponent<AudioSource>().PlayOneShot(ScreamerSound);        
+    }
 
-        GetComponent<AudioSource>().PlayOneShot(ScreamerSound);
-
+    IEnumerator playTime()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
+        {
             InteractionTrigger();
+            StartCoroutine(playTime());     
+        }
     }    
 }

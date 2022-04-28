@@ -7,18 +7,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensetivity = 3.5f;
     [SerializeField] float walkSpeed = 6.0f;
-    [SerializeField] float gravity = -13.0f;
+    [SerializeField] float gravity = -5.0f;
 
     [SerializeField] bool lockCursor = true;
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
-    CharacterController controller = null;
+    CharacterController controller;
 
+    public float standingHeight = 2.0f;
+    public float crouchHeight = 1.5f;    
+    public float crouchMultiplier = 0.5f;
+
+    public float crawlHeight = 0.5f;
+    public float crawlMultiplier = 0.25f;
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
-
+        
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -64,7 +70,32 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * walkSpeed + Vector3.up * velocityY;
 
-        controller.Move(velocity * Time.deltaTime);
+        //Crouch
+        /*if (Input.GetKeyDown(KeyCode.C))
+        {
+            controller.height = crouchHeight;
+            velocity *= crouchMultiplier;
+        }
 
-    }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            controller.height = standingHeight;
+        }
+        */
+        //Crawl
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            controller.height = crawlHeight;
+            velocity *= crawlMultiplier;
+        }
+        else
+        {
+            controller.height = standingHeight;
+        }
+
+        controller.Move(velocity * Time.deltaTime);
+    }    
+
+
+        
 }
