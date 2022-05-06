@@ -29,5 +29,9 @@ public class trigger : MonoBehaviour
             InteractionTrigger();
             StartCoroutine(playTime());     
         }
+        if (other.tag == tag)
+        {
+            GetComponent<MeshRenderer>().enabled=true;
+        }
     }    
 }

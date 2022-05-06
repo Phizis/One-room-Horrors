@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Interaction : MonoBehaviour
 {
-    public GameObject myPlayer;    
+    public GameObject myPlayer;
     public float interactionDistance = 2f;
     private float distance;
 
@@ -13,24 +13,52 @@ public class Interaction : MonoBehaviour
 
     public Image myImage;
 
+    public Animator anim;
+    public AudioClip ScreamerSound;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void OnMouseOver()
     {
         distance = Vector3.Distance(myPlayer.GetComponent <Transform>().position, transform.position);
-
-        if(distance < interactionDistance)
+        
+        if (distance < interactionDistance)
         {
             myImage.enabled = true;
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (tag == "Item" || tag == "Book" || tag == "Candle" || tag == "Chalk")
             {
-                transform.position = arm.position;
-                transform.rotation = arm.rotation;
-                transform.SetParent(arm);
-                GetComponent <Rigidbody> ().isKinematic = true;
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    transform.position = arm.position;
+                    transform.rotation = arm.rotation;
+                    transform.SetParent(arm);
+                    GetComponent<Rigidbody>().isKinematic = true;
+                }
+            }
+            if (tag == "BookOpened")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    anim.Play("OpenBook");
+                    tag = "Inactive";
+                    GetComponent<AudioSource>().PlayOneShot(ScreamerSound);
+                }
             }
         }
         else
         {
             myImage.enabled = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == tag)
+        {
+            Destroy(gameObject);
         }
     }
 
