@@ -1,37 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class trigger : MonoBehaviour
 {
-    public AudioClip ScreamerSound;
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<BoxCollider>().isTrigger = true;
-    }
+    public AudioSource screamerSound;
+    public GameObject activateObj;
+    public bool screamer = false;
+    public GameObject screamerObject;
+    public float screamerTime = 0f;
 
     public void InteractionTrigger()
     {
-        GetComponent<AudioSource>().PlayOneShot(ScreamerSound);        
-    }
-
-    IEnumerator playTime()
-    {
-        yield return new WaitForSeconds(3);
-        Destroy(gameObject);
+        GetComponent<BoxCollider>().enabled = false;
+        screamerSound.Play();        
+        screamerObject.SetActive(true);        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && screamer)
         {
-            InteractionTrigger();
-            StartCoroutine(playTime());     
+            InteractionTrigger();            
+            Destroy(gameObject,screamerTime);
         }
         if (other.tag == tag)
         {
-            GetComponent<MeshRenderer>().enabled=true;
+            activateObj.SetActive(true);
         }
-    }    
+    }        
 }
