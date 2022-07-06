@@ -21,4 +21,8 @@ public class OptionMenu : MonoBehaviour
     {
         AudioListener.pause = !AudioListener.pause;
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

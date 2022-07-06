@@ -14,26 +14,44 @@ public class Interaction : MonoBehaviour
     public bool draggable = false;
 
     public Image myImage;
+    public Image fill;
 
     public GameObject noteScreen;
     private bool notesEnable = false;
 
-    public Animator anim;
+    Animator anim;
     public AudioClip currentSound1;
     public AudioClip currentSound2;
+    AudioSource interactionSound;
+    
 
     public GameObject candleLight;
     private bool lightEnable = false;
 
-    public GameObject radialBar;
+    float currentValue = 0.1f, maxValue = 14.9f;
 
-    public void notePause()
+    int reading_count = 0;
+    public GameObject loadingScreen;
+    public GameObject morning;
+    bool whisperEnable = true;
+    bool reload = false;
+    bool getKey = true;
+
+    public GameObject raven;
+    public GameObject nextPartCollider;
+
+    public GameObject screamer;
+    public GameObject screamerSource;
+
+    public GameObject enemy;
+    public void NotePause()
     {
         noteScreen.SetActive(true);
+        interactionSound.Play();
         notesEnable = true;
         Time.timeScale = 0f;
     }
-    public void noteResume()
+    public void NoteResume()
     {
         noteScreen.SetActive(false);
         notesEnable = false;
@@ -42,7 +60,10 @@ public class Interaction : MonoBehaviour
 
     void Start()
     {
+        interactionSound = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+        if (tag == "NextPartTrigger")
+            fill.fillAmount = currentValue / maxValue;
     }
 
     void OnMouseOver()
@@ -59,6 +80,7 @@ public class Interaction : MonoBehaviour
                     transform.position = arm.position;
                     transform.rotation = arm.rotation;
                     transform.SetParent(arm);
+                    interactionSound.Play();
                     GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
@@ -68,8 +90,11 @@ public class Interaction : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     anim.Play("OpenBook");
-                    tag = "Inactive";
-                    GetComponent<AudioSource>().PlayOneShot(currentSound1);
+                    tag = "Book";
+                    GetComponent<AudioSource>().Play();
+                    raven.SetActive(true);
+                    GetComponent<BoxCollider>().enabled = false;
+                    nextPartCollider.SetActive(true);
                 }
             }
 
@@ -79,22 +104,47 @@ public class Interaction : MonoBehaviour
                 {
                     if (notesEnable)
                     {
-                        noteResume();
+                        NoteResume();
                     }
                     else 
                     { 
-                        notePause();   
+                        NotePause();   
                     }                        
                 }
             }
             
             if (tag == "NextPartTrigger")
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                fill.enabled = true;                
+
+                if (Input.GetKeyDown(KeyCode.E) && !reload)
                 {
-                    radialBar.SetActive(true);                    
+                    getKey = true;
+
+                    if (whisperEnable)
+                    {
+                        interactionSound.PlayOneShot(currentSound1);
+                        whisperEnable = false;
+                    }
+                    else
+                        interactionSound.UnPause();
                 }
-                NextSceneTrigger();
+
+                if (Input.GetKey(KeyCode.E) && !reload && getKey)
+                {
+                    Add();
+                }
+
+                if (Input.GetKeyUp(KeyCode.E) && !reload )
+                {
+                    interactionSound.Pause();                    
+                }
+
+                if (Input.GetKeyUp(KeyCode.E) && reload)
+                {
+                    interactionSound.PlayOneShot(currentSound2);
+                    reload = false;
+                }
             }
 
             if (tag == "LightUp")
@@ -103,45 +153,56 @@ public class Interaction : MonoBehaviour
                     if (lightEnable)                    
                     {
                         candleLight.SetActive(false);
-                        GetComponent<AudioSource>().PlayOneShot(currentSound2);
+                        interactionSound.PlayOneShot(currentSound2);
                         lightEnable = false;
                     }
                     else
                     {
                         candleLight.SetActive(true);
-                        GetComponent<AudioSource>().PlayOneShot(currentSound1);
+                        interactionSound.PlayOneShot(currentSound1);
                         lightEnable = true;
                     }
             }
-        }
-        else
-        {            
-            myImage.enabled = false;
-            if (tag == "NextPartTrigger")
-                radialBar.SetActive(false);
-        }        
+        }      
     }  
     
-    void NextSceneTrigger()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-
-        radialBar.GetComponent<RadialBarFiller>().enabled = true;
-            
-    }
 
     void OnMouseExit()
     {        
         myImage.enabled = false;
+        
         if (tag == "NextPartTrigger")
-            radialBar.SetActive(false);
+        {
+            fill.enabled = false;
+            interactionSound.Pause();
+            getKey = false;
+        }
+    }
+
+    public void Add()
+    {
+        currentValue += Time.deltaTime;
+
+        if (currentValue > maxValue)
+            currentValue = maxValue;
+
+        fill.fillAmount = currentValue / maxValue;
+
+        if (currentValue == maxValue)
+        {
+            reading_count++;
+            currentValue = 0.1f;
+            interactionSound.Stop();
+            reload = true;
+            whisperEnable = true;
+        }        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == tag)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -155,6 +216,27 @@ public class Interaction : MonoBehaviour
                 GetComponent<Rigidbody>().isKinematic = false;
             }
         }
-               
+
+        if (SceneManager.GetActiveScene().buildIndex == 2 && reading_count == 2)
+        {
+            screamerSource.SetActive(false);
+            screamer.SetActive(true);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 3 && reading_count == 1)
+        {
+            screamer.SetActive(true);
+        }
+
+        if (reading_count == 3)
+        {
+            Destroy(enemy);
+            fill.enabled = false;
+            morning.SetActive(true);
+            morning.GetComponent<Light>().intensity += Time.deltaTime*0.1f;
+
+            if (morning.GetComponent<Light>().intensity >= 1f)
+                loadingScreen.SetActive(true);
+        }
     }
 }

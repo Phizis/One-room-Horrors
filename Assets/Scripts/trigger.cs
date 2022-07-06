@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class trigger : MonoBehaviour
 {
-    public AudioSource screamerSound;
+    AudioSource interactionSound;
     public GameObject activateObj;
+
     public bool screamer = false;
     public GameObject screamerObject;
     public float screamerTime = 0f;
 
+    void Start()
+    {
+        if(!screamer)
+            interactionSound = GetComponent<AudioSource>();
+    }
     public void InteractionTrigger()
     {
-        GetComponent<BoxCollider>().enabled = false;
-        screamerSound.Play();        
+        GetComponent<BoxCollider>().enabled = false;     
         screamerObject.SetActive(true);        
     }
 
@@ -24,6 +29,7 @@ public class trigger : MonoBehaviour
         }
         if (other.tag == tag)
         {
+            interactionSound.Play();
             activateObj.SetActive(true);
         }
     }        

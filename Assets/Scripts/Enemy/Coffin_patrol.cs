@@ -18,7 +18,6 @@ public class Coffin_patrol : StateMachineBehaviour
         Transform pointsObject = GameObject.FindGameObjectWithTag("PatrolPath").transform;
         foreach (Transform point in pointsObject)
             patrolPoints.Add(point);
-
         enemyAgent = animator.GetComponent<NavMeshAgent>();
         enemyAgent.SetDestination(patrolPoints[0].position);
 
@@ -31,8 +30,8 @@ public class Coffin_patrol : StateMachineBehaviour
             enemyAgent.SetDestination(patrolPoints[Random.Range(0, patrolPoints.Count)].position);
         }
 
-        if(chaseRange < 10)
-            chaseRange+= Time.deltaTime;
+        if(chaseRange < 8)
+            chaseRange+= Time.deltaTime*0.7f;
 
         timer += Time.deltaTime;
         if(timer > 10)

@@ -17,8 +17,8 @@ public class Coffin_Idle : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(chaseRange < 10)
-            chaseRange += Time.deltaTime;
+        if(chaseRange < 8)
+            chaseRange += Time.deltaTime * 0.7f;
         float distance = Vector3.Distance(animator.transform.position, player.position);
         if (distance < chaseRange)
             animator.SetBool("isChasing", true);
