@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: f75797dda059e584b9a8f07660677492
+timeCreated: 1655087004
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Book1_2
+    100002: Book_s1
+    100004: Book_s1.001
+    100006: Book_s1.002
+    100008: Book_s2
+    100010: Book_s2.001
+    100012: Book_s2.002
+    100014: Book_s3
+    100016: Book_s3.001
+    100018: Book_s3.002
+    100020: book_s3_1
+    100022: book_s3_2
+    100024: book_s3_3
+    100026: book_s3_4
+    100028: Book_s4
+    100030: Book_s4.001
+    100032: Book_s4.002
+    100034: Book_s4.003
+    100036: Book_s4.004
+    100038: Book_s7
+    100040: Book_s7.001
+    100042: Book_s7.002
+    100044: //RootNode
+    100046: bookshelf
+    100048: Cube
+    100050: Cylinder
+    400000: Book1_2
+    400002: Book_s1
+    400004: Book_s1.001
+    400006: Book_s1.002
+    400008: Book_s2
+    400010: Book_s2.001
+    400012: Book_s2.002
+    400014: Book_s3
+    400016: Book_s3.001
+    400018: Book_s3.002
+    400020: book_s3_1
+    400022: book_s3_2
+    400024: book_s3_3
+    400026: book_s3_4
+    400028: Book_s4
+    400030: Book_s4.001
+    400032: Book_s4.002
+    400034: Book_s4.003
+    400036: Book_s4.004
+    400038: Book_s7
+    400040: Book_s7.001
+    400042: Book_s7.002
+    400044: //RootNode
+    400046: bookshelf
+    400048: Cube
+    400050: Cylinder
+    2300000: Book1_2
+    2300002: Book_s1
+    2300004: Book_s1.001
+    2300006: Book_s1.002
+    2300008: Book_s2
+    2300010: Book_s2.001
+    2300012: Book_s2.002
+    2300014: Book_s3
+    2300016: Book_s3.001
+    2300018: Book_s3.002
+    2300020: book_s3_1
+    2300022: book_s3_2
+    2300024: book_s3_3
+    2300026: book_s3_4
+    2300028: Book_s4
+    2300030: Book_s4.001
+    2300032: Book_s4.002
+    2300034: Book_s4.003
+    2300036: Book_s4.004
+    2300038: Book_s7
+    2300040: Book_s7.001
+    2300042: Book_s7.002
+    2300044: bookshelf
+    2300046: Cube
+    2300048: Cylinder
+    3300000: Book1_2
+    3300002: Book_s1
+    3300004: Book_s1.001
+    3300006: Book_s1.002
+    3300008: Book_s2
+    3300010: Book_s2.001
+    3300012: Book_s2.002
+    3300014: Book_s3
+    3300016: Book_s3.001
+    3300018: Book_s3.002
+    3300020: book_s3_1
+    3300022: book_s3_2
+    3300024: book_s3_3
+    3300026: book_s3_4
+    3300028: Book_s4
+    3300030: Book_s4.001
+    3300032: Book_s4.002
+    3300034: Book_s4.003
+    3300036: Book_s4.004
+    3300038: Book_s7
+    3300040: Book_s7.001
+    3300042: Book_s7.002
+    3300044: bookshelf
+    3300046: Cube
+    3300048: Cylinder
+    4300000: bookshelf
+    4300002: Book1_2
+    4300004: Book_s1
+    4300006: Book_s2
+    4300008: Book_s3
+    4300010: Book_s4
+    4300012: Cube
+    4300014: Cylinder
+    4300016: Book_s7
+    4300018: Book_s7.001
+    4300020: book_s3_3
+    4300022: book_s3_1
+    4300024: Book_s7.002
+    4300026: Book_s1.001
+    4300028: book_s3_2
+    4300030: book_s3_4
+    4300032: Book_s4.001
+    4300034: Book_s1.002
+    4300036: Book_s2.001
+    4300038: Book_s3.001
+    4300040: Book_s4.002
+    4300042: Book_s3.002
+    4300044: Book_s2.002
+    4300046: Book_s4.003
+    4300048: Book_s4.004
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
